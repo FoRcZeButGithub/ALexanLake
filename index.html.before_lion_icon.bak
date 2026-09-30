@@ -346,26 +346,7 @@
         }
 
         .popout-house-pill .pill-lion {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .popout-house-pill .pill-lion .lion-icon-img {
-            width: 18px;
-            height: 20px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(255, 216, 117, 0.75)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.85));
-            transition: transform 0.3s ease, filter 0.3s ease;
-            vertical-align: middle;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .popout-house-pill:hover .pill-lion .lion-icon-img {
-            transform: scale(1.15) rotate(-3deg);
-            filter: drop-shadow(0 0 8px rgba(255, 225, 140, 0.95)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+            font-size: 1rem;
         }
 
         /* Warning Quote Plaque below the character card */
@@ -4258,26 +4239,9 @@
         }
 
         .hero-crest-badge .badge-lion-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 13px;
             line-height: 1;
-        }
-
-        .hero-crest-badge .badge-lion-icon .lion-icon-img {
-            width: 16px;
-            height: 18px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(255, 216, 117, 0.8)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.85));
-            transition: transform 0.3s ease, filter 0.3s ease;
-            vertical-align: middle;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .hero-stage-container:hover .hero-crest-badge .badge-lion-icon .lion-icon-img {
-            transform: scale(1.18) rotate(-3deg);
-            filter: drop-shadow(0 0 9px rgba(255, 225, 140, 0.95)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.95));
+            filter: drop-shadow(0 0 4px #ffd875);
         }
 
         .hero-stage-container:hover .hero-crest-badge {
@@ -4711,9 +4675,7 @@
 
                             <!-- 🦁 ตรากริฟฟินดอร์ด้านบน (Gryffindor Pride Badge) -->
                             <div class="hero-crest-badge" aria-hidden="true">
-                                <span class="badge-lion-icon" title="Gryffindor Lion">
-                                    <img src="images/lion-symbol.png" alt="Gryffindor Lion" class="lion-icon-img" />
-                                </span>
+                                <span class="badge-lion-icon">🦁</span>
                                 <span>Gryffindor Pride</span>
                             </div>
 
@@ -5270,9 +5232,7 @@
                                 <span class="cursive-sub">Nigelus Lake</span>
                             </div>
                             <div class="popout-house-pill">
-                                <span class="pill-lion" title="Gryffindor Lion">
-                                    <img src="images/lion-symbol.png" alt="Gryffindor Lion" class="lion-icon-img" />
-                                </span>
+                                <span class="pill-lion">🦁</span>
                                 <span>Gryffindor • Year 6</span>
                             </div>
                         </div>
