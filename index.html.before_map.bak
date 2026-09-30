@@ -9,8 +9,7 @@
     <!-- Google Fonts: Noto Serif Thai fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Satisfy&family=Lobster+Two:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;900&family=Comfortaa:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -85,309 +84,6 @@
             font-weight: normal;
             font-style: normal;
             font-display: swap;
-        }
-
-        /* ==========================================================================
-           POPOUT CHARACTER CARD FRAME (ABOUT TAB)
-           ตัวละครทะลุล้นออกจากกรอบ (3D Pop-Out Breakout)
-           ========================================================================== */
-
-        .character-portrait-box.popout-portrait-container {
-            border: none !important;
-            background: transparent !important;
-            box-shadow: none !important;
-            overflow: visible !important;
-            height: auto !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            perspective: 1200px;
-            padding: 0;
-            cursor: default !important;
-        }
-
-        .character-portrait-box.popout-portrait-container::after {
-            display: none !important;
-        }
-
-        .portrait-inner-art.popout-art-stage {
-            /* =========================================================================
-               🎛️ จุดปรับแต่งขนาดและตำแหน่งภาพล้นกรอบ (POPOUT CONTROLS)
-               คุณสามารถปรับแก้ตัวเลข 4 บรรทัดนี้ได้เลยครับ จะแสดงผลทันที:
-               ========================================================================= */
-            --popout-card-top: 100px;
-            /* 🎴 ระดับความสูงขอบบนของการ์ด (ยิ่งเลขเยอะ กรอบการ์ดจะยิ่งเลื่อนลงต่ำ หัวจะยิ่งล้นเด่นออกมา) */
-            --popout-img-height: 440px;
-            /* 📏 ความสูง/ขนาดของรูปตัวละคร (ปรับตัวเลขนี้ได้เลย เช่น 420px, 440px, 480px) */
-            --popout-img-scale: 0.95;
-            /* 🔍 สเกลซูมขยายภาพตัวละคร (1.0 = ปกติ, 1.05 = ขยาย 5%, 1.1 = ขยาย 10%) */
-            --popout-img-bottom: 0px;
-            /* ⬆️ เลื่อนรูปขึ้นหรือลงจากขอบล่าง (เช่น 0px, 10px, -10px) */
-
-            position: relative;
-            width: 100%;
-            max-width: 320px;
-            height: 480px;
-            margin-top: 40px;
-            /* เว้นระยะด้านบนเพื่อให้หัวตัวละครมีพื้นที่ล้นออกมาอย่างโดดเด่น */
-            overflow: visible !important;
-            background: transparent !important;
-            padding: 0;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .character-portrait-box:hover .portrait-inner-art.popout-art-stage {
-            transform: translateY(-8px);
-        }
-
-        /* Ambient Radiant Aura Glow behind the card */
-        .popout-ambient-glow {
-            position: absolute;
-            top: var(--popout-card-top, 100px);
-            bottom: -10px;
-            left: -12px;
-            right: -12px;
-            background: radial-gradient(circle at 50% 50%, rgba(223, 162, 44, 0.45) 0%, rgba(138, 14, 25, 0.3) 50%, transparent 75%);
-            filter: blur(20px);
-            border-radius: 35px;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.8;
-            transition: opacity 0.4s ease;
-        }
-
-        .character-portrait-box:hover .popout-ambient-glow {
-            opacity: 1;
-            filter: blur(26px);
-        }
-
-        /* The Rounded Card Frame (Starts down at --popout-card-top) */
-        .popout-card-frame {
-            position: absolute;
-            top: var(--popout-card-top, 100px);
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-radius: 28px;
-            border: 2.5px solid var(--gold-bright);
-            background: radial-gradient(circle at 50% 25%, #460911 0%, #200306 70%, #0d0102 100%);
-            box-shadow:
-                0 22px 50px rgba(0, 0, 0, 0.95),
-                0 0 35px rgba(223, 162, 44, 0.4),
-                inset 0 0 30px rgba(0, 0, 0, 0.85);
-            z-index: 1;
-            overflow: hidden;
-            transition: box-shadow 0.4s ease, border-color 0.4s ease;
-        }
-
-        .character-portrait-box:hover .popout-card-frame {
-            border-color: #ffe6a0;
-            box-shadow:
-                0 28px 60px rgba(0, 0, 0, 0.98),
-                0 0 50px rgba(243, 199, 102, 0.65),
-                inset 0 0 35px rgba(255, 215, 0, 0.2);
-        }
-
-        .popout-card-bg {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .popout-card-watermark {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 220px;
-            opacity: 0.18;
-            filter: drop-shadow(0 0 15px rgba(223, 162, 44, 0.4));
-        }
-
-        .popout-card-watermark img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .popout-card-glow-core {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(223, 162, 44, 0.25) 0%, transparent 70%);
-            filter: blur(15px);
-        }
-
-        /* Gilded Corner Flourishes on Top Card Rim */
-        .popout-card-corner-ornament {
-            position: absolute;
-            top: 10px;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--gold-bright);
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-            pointer-events: none;
-        }
-
-        .popout-card-corner-ornament.topleft {
-            left: 10px;
-            border-right: none;
-            border-bottom: none;
-            border-top-left-radius: 8px;
-        }
-
-        .popout-card-corner-ornament.topright {
-            right: 10px;
-            border-left: none;
-            border-bottom: none;
-            border-top-right-radius: 8px;
-        }
-
-        /* Character Pop-out Layer (ไม่มีการตัดขอบ ให้หัวและภาพขยายล้นกรอบได้อย่างอิสระ 100%) */
-        .popout-character-layer {
-            position: absolute;
-            inset: 0;
-            overflow: visible !important;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .popout-character-img {
-            position: absolute;
-            bottom: var(--popout-img-bottom, 0px);
-            left: 50%;
-            transform: translateX(-54.5%) scale(var(--popout-img-scale, 1.0));
-            transform-origin: bottom center;
-            height: var(--popout-img-height, 440px) !important;
-            width: auto !important;
-            max-width: none !important;
-            max-height: none !important;
-            object-fit: contain;
-            object-position: bottom center;
-            filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.85));
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), filter 0.4s ease;
-        }
-
-        .character-portrait-box:hover .popout-character-img {
-            transform: translateX(-54.5%) translateY(-6px) scale(calc(var(--popout-img-scale, 1.0) * 1.025));
-            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 20px rgba(223, 162, 44, 0.45));
-        }
-
-        .popout-character-shimmer {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent 35%, rgba(255, 235, 170, 0.15) 50%, transparent 65%);
-            background-size: 200% 200%;
-            pointer-events: none;
-            animation: magicSheen 7s infinite ease-in-out;
-            z-index: 4;
-        }
-
-        /* Card Bottom Gilded Overlay & Cursive Calligraphy (matching reference image) */
-        .popout-card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 24px 16px 18px;
-            background: linear-gradient(to top, rgba(14, 1, 3, 0.95) 0%, rgba(20, 2, 4, 0.72) 65%, transparent 100%);
-            border-radius: 0 0 28px 28px;
-            z-index: 5;
-            pointer-events: none;
-            text-align: center;
-        }
-
-        .popout-cursive-name {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1.1;
-        }
-
-        .popout-cursive-name .cursive-main {
-            font-family: 'Satisfy', 'Lobster Two', cursive;
-            font-size: 2.5rem;
-            color: #ffffff;
-            text-shadow:
-                0 2px 10px rgba(0, 0, 0, 0.95),
-                0 0 20px rgba(223, 162, 44, 0.65);
-            letter-spacing: 0.5px;
-        }
-
-        .popout-cursive-name .cursive-sub {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive, serif;
-            font-size: 1.15rem;
-            color: var(--gold-bright);
-            letter-spacing: 1.5px;
-            text-shadow: 0 2px 6px #000;
-            margin-top: -2px;
-        }
-
-        .popout-house-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 4px 14px;
-            border-radius: 20px;
-            background: rgba(45, 8, 12, 0.9);
-            border: 1px solid var(--gold-antique);
-            color: #ffe6a0;
-            font-family: 'SOV Yoona', 'Noto Serif Thai', serif;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-
-        .popout-house-pill .pill-lion {
-            font-size: 1rem;
-        }
-
-        /* Warning Quote Plaque below the character card */
-        .popout-rules-plaque {
-            margin-top: 16px;
-            width: 100%;
-            max-width: 320px;
-            background: radial-gradient(ellipse at center, rgba(42, 6, 10, 0.92) 0%, rgba(16, 2, 4, 0.96) 100%);
-            border: 1.5px solid var(--gold-antique);
-            border-radius: 12px;
-            padding: 12px 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .popout-rules-plaque:hover {
-            border-color: var(--gold-bright);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85), 0 0 15px rgba(223, 162, 44, 0.25);
-            transform: translateY(-2px);
-        }
-
-        .rules-quote-text {
-            font-family: 'SOV Yoona', 'Samphan Condensed', 'Noto Serif Thai', serif;
-            font-size: 1.25rem;
-            color: #ffe6a0;
-            line-height: 1.75;
-            letter-spacing: 0.3px;
-        }
-
-        .rules-author-tag {
-            font-family: 'Sarun HarryPotter', 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--gold-bright);
-            margin-top: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .rules-author-tag .spark-star {
-            color: #ffe6a0;
-            margin-right: 2px;
         }
     </style>
 
@@ -1152,7 +848,7 @@
 
         /* ===== TAB 2: INFORMATION ===== */
         .section-ribbon-title {
-            font-family: 'Sarun HarryPotter', 'SOV Yoona', 'Noto Serif Thai', cursive, serif;
+            font-family: 'Sarun HarryPotter', 'Harry Potter', cursive;
             font-size: 2.6rem;
             letter-spacing: 1px;
             color: var(--gold-bright);
@@ -1188,7 +884,7 @@
         /* 4. The Backdrop Plinth (แผงแท่นไม้โอ๊คขัดเงา) */
         .grimoire-plinth-panel {
             position: relative;
-            background:
+            background: 
                 radial-gradient(ellipse at 50% 30%, #200407 0%, #120103 80%, #0a0102 100%);
             border: 2px solid #5a3814;
             outline: 1.5px solid rgba(223, 162, 44, 0.45);
@@ -1196,7 +892,7 @@
             border-radius: 12px;
             padding: 16px 18px 20px 18px;
             margin-bottom: 22px;
-            box-shadow:
+            box-shadow: 
                 inset 0 0 35px rgba(0, 0, 0, 0.95),
                 inset 0 1px 2px rgba(223, 162, 44, 0.35),
                 0 12px 30px rgba(0, 0, 0, 0.85);
@@ -1260,13 +956,15 @@
         /* 1 & 2. Gilded Buttons: Double Border, Filigree Corners, Tooled Velvet Texture & Emboss */
         .grimoire-btn {
             position: relative;
-            background:
+            background: 
                 radial-gradient(ellipse at 50% 20%, #630811 0%, #3a0307 65%, #180103 100%),
-                repeating-linear-gradient(45deg,
+                repeating-linear-gradient(
+                    45deg,
                     rgba(0, 0, 0, 0.09) 0px,
                     rgba(0, 0, 0, 0.09) 2px,
                     transparent 2px,
-                    transparent 4px);
+                    transparent 4px
+                );
             border: 1.5px solid #dfa22c;
             border-radius: 6px;
             padding: 13px 10px;
@@ -1277,7 +975,7 @@
             cursor: pointer;
             outline: none;
             /* Bevel & Emboss (มิติขอบยุบ-นูน) */
-            box-shadow:
+            box-shadow: 
                 inset 0 1.5px 2px rgba(255, 230, 150, 0.45),
                 inset 0 -2.5px 6px rgba(0, 0, 0, 0.85),
                 0 6px 16px rgba(0, 0, 0, 0.8),
@@ -1310,24 +1008,20 @@
             opacity: 0.85;
             transition: opacity 0.25s ease, filter 0.25s ease;
         }
-
         .btn-filigree.top-left {
             top: 2px;
             left: 2px;
         }
-
         .btn-filigree.top-right {
             top: 2px;
             right: 2px;
             transform: scaleX(-1);
         }
-
         .btn-filigree.bottom-left {
             bottom: 2px;
             left: 2px;
             transform: scaleY(-1);
         }
-
         .btn-filigree.bottom-right {
             bottom: 2px;
             right: 2px;
@@ -1336,12 +1030,12 @@
 
         /* Button Hover & Active States */
         .grimoire-btn:hover {
-            background:
+            background: 
                 radial-gradient(ellipse at 50% 15%, #7a0b16 0%, #480409 65%, #1e0204 100%),
                 repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.09) 0px, rgba(0, 0, 0, 0.09) 2px, transparent 2px, transparent 4px);
             border-color: #ffd875;
             transform: translateY(-2.5px);
-            box-shadow:
+            box-shadow: 
                 inset 0 1.5px 3px rgba(255, 240, 180, 0.75),
                 inset 0 -2px 6px rgba(0, 0, 0, 0.8),
                 0 10px 22px rgba(0, 0, 0, 0.9),
@@ -1360,7 +1054,7 @@
 
         .grimoire-btn:active {
             transform: translateY(1px);
-            box-shadow:
+            box-shadow: 
                 inset 0 2px 5px rgba(0, 0, 0, 0.9),
                 inset 0 -1px 2px rgba(255, 230, 150, 0.3),
                 0 3px 8px rgba(0, 0, 0, 0.9);
@@ -1381,7 +1075,7 @@
             border-radius: 4px;
             background: linear-gradient(135deg, #3d050a 0%, #170103 100%);
             border: 1.5px solid #dfa22c;
-            box-shadow:
+            box-shadow: 
                 inset 0 1px 2px rgba(255, 220, 130, 0.5),
                 0 2px 5px rgba(0, 0, 0, 0.8);
             font-family: 'Cinzel', serif;
@@ -1584,10 +1278,6 @@
         }
 
         /* ===== TAB 3: GALLERY ===== */
-        #tab-gallery {
-            padding-bottom: 120px;
-        }
-
         .gallery-mosaic-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1678,1633 +1368,12 @@
             color: #fff;
         }
 
-        /* ================= MARAUDER'S MAP (ENCHANTED 3D BOOK & MAP) ================= */
-        :root {
-            --map-brown: #615349;
-            --map-brown-dark: #3b2c21;
-        }
-
-        /* Gallery View Mode Switcher */
-        .gallery-view-mode-bar {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            margin: 10px auto 25px;
-            flex-wrap: wrap;
-        }
-
-        .view-mode-btn {
-            background: rgba(30, 4, 7, 0.88);
-            border: 1.5px solid var(--gold-antique);
-            color: #e5cb9d;
-            font-family: 'Noto Serif Thai', serif;
-            font-size: 1.25rem;
-            padding: 8px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        .view-mode-btn .mode-en {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive;
-            font-size: 1.15rem;
-            color: #ffe6a0;
-        }
-
-        .view-mode-btn:hover {
-            border-color: var(--gold-bright);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .view-mode-btn.active {
-            background: linear-gradient(135deg, rgba(120, 20, 25, 0.95), rgba(60, 8, 12, 0.95));
-            border-color: var(--gold-bright);
-            color: var(--gold-bright);
-            box-shadow: 0 6px 18px rgba(243, 199, 102, 0.35);
-        }
-
-        .gallery-view-section {
-            display: none;
-            animation: fadeInView 0.4s ease forwards;
-        }
-
-        .gallery-view-section.active {
-            display: block;
-        }
-
-        @keyframes fadeInView {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Marauder's Map Stage */
-        .marauder-map-stage {
-            position: relative;
-            width: 100%;
-            padding: 24px 10px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at center, rgba(46, 4, 7, 0.7) 0%, rgba(15, 2, 4, 0.98) 100%);
-            border: 2px solid var(--gold-antique);
-            border-radius: 12px;
-            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.88), 0 12px 35px rgba(0, 0, 0, 0.7);
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-
-        /* Incantation Header */
-        .map-incantation-panel {
-            text-align: center;
-            margin-bottom: 20px;
-            z-index: 20;
-        }
-
-        .map-spell-prompt {
-            font-family: 'Noto Serif Thai', serif;
-            font-size: 1.35rem;
-            color: var(--gold-bright);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .toggle-map-btn {
-            border: 2px solid var(--gold-bright);
-            background: linear-gradient(135deg, rgba(80, 10, 15, 0.92), rgba(30, 4, 7, 0.98));
-            font-family: 'Noto Serif Thai', serif;
-            font-size: 1.45rem;
-            font-weight: 600;
-            color: #fff;
-            padding: 10px 34px;
-            cursor: pointer;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 18px rgba(243, 199, 102, 0.25);
-            transition: all 0.35s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .toggle-map-btn::before {
-            content: "";
-            position: absolute;
-            width: calc(100% - 8px);
-            height: calc(100% - 8px);
-            left: 2px;
-            top: 2px;
-            border: 1px solid rgba(255, 235, 170, 0.4);
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-map-btn:hover {
-            background: linear-gradient(135deg, rgba(120, 20, 25, 0.96), rgba(50, 8, 12, 0.98));
-            color: var(--gold-bright);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.85), 0 0 25px rgba(243, 199, 102, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .toggle-map-btn:hover::before {
-            left: -2px;
-            top: -2px;
-            width: calc(100% + 2px);
-            height: calc(100% + 2px);
-            border-color: var(--gold-bright);
-        }
-
-        .map-sub-spell-text {
-            font-family: 'Cinzel', 'Satisfy', serif;
-            font-size: 1.15rem;
-            color: #d1b47c;
-            margin-top: 8px;
-            font-style: italic;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px #000;
-        }
-
-        /* Map Navigation Bar ("แต่นำทางแต่รูปภาพเหมือนแผนที่") */
-        .map-navigator-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin: 8px 0 18px;
-            z-index: 20;
-            max-width: 980px;
-        }
-
-        .map-nav-btn {
-            background: rgba(26, 4, 7, 0.85);
-            border: 1px solid var(--gold-antique);
-            color: #e5cb9d;
-            font-family: 'Noto Serif Thai', serif;
-            font-size: 1.15rem;
-            padding: 5px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .map-nav-btn .nav-en {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive;
-            font-size: 1.05rem;
-            color: #ffe6a0;
-        }
-
-        .map-nav-btn:hover,
-        .map-nav-btn.active-target {
-            background: var(--crimson-crest);
-            border-color: var(--gold-bright);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(243, 199, 102, 0.4);
-        }
-
-        /* 3D Viewport & Scaling */
-        .map-viewport-wrapper {
-            width: 100%;
-            min-height: 560px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1600px;
-            overflow-x: auto;
-            overflow-y: visible;
-            padding: 40px 10px 60px;
-        }
-
-        .map-scale-container {
-            position: relative;
-            width: 306px;
-            height: 600px;
-            transform-origin: center center;
-            transform: scale(0.85);
-            transition: transform 0.4s ease;
-        }
-
-        @media (max-width: 1100px) {
-            .map-scale-container {
-                transform: scale(0.75);
-            }
-
-            .map-viewport-wrapper {
-                min-height: 500px;
-            }
-        }
-
-        @media (max-width: 820px) {
-            .map-scale-container {
-                transform: scale(0.65);
-            }
-
-            .map-viewport-wrapper {
-                min-height: 450px;
-            }
-        }
-
-        @media (max-width: 540px) {
-            .map-scale-container {
-                transform: scale(0.52);
-            }
-
-            .map-viewport-wrapper {
-                min-height: 380px;
-            }
-        }
-
-        /* Map Base */
-        .map-base {
-            width: 306px;
-            height: 600px;
-            margin: auto;
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/9.png") center center / cover;
-            position: relative;
-            display: inline-block;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85);
-            border-radius: 2px;
-            cursor: pointer;
-        }
-
-        .map-base.active {
-            cursor: default;
-        }
-
-        /* Flaps (Cover Top & Bottom) */
-        .map-flap {
-            transform-style: preserve-3d;
-            position: absolute;
-            width: 100%;
-            height: 25%;
-            margin: auto;
-            left: 0;
-            right: 0;
-            transition: 0.5s ease;
-            top: 25%;
-            z-index: 5;
-        }
-
-        .map-flap__front,
-        .map-flap__back {
-            backface-visibility: hidden;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-
-        .map-flap__back {
-            transform: scale(-1) rotateY(180deg);
-        }
-
-        .map-flap.flap--1 {
-            box-shadow: 0 -1px 6px rgba(97, 83, 73, 0.5);
-            top: 25%;
-        }
-
-        .map-flap.flap--1 .map-flap__front {
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/mini-1.png") center left / cover;
-        }
-
-        .map-flap.flap--1 .map-flap__back {
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/mini-3.png") -3px 0 / cover;
-        }
-
-        .map-flap.flap--2 {
-            box-shadow: 0 1px 6px rgba(97, 83, 73, 0.5);
-            top: 50%;
-        }
-
-        .map-flap.flap--2 .map-flap__front {
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/mini-2.png") center left / cover;
-        }
-
-        .map-flap.flap--2 .map-flap__back {
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/mini-4.png") -3px 0 / cover;
-        }
-
-        /* Map Sides (Wings) */
-        .map-side {
-            height: 600px;
-            width: 152px;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: 0.3s ease;
-            top: 0;
-        }
-
-        .map-side .front,
-        .map-side .back {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background-repeat: no-repeat;
-            background-position: left top;
-            background-size: cover;
-            background-image: var(--image);
-            backface-visibility: hidden;
-        }
-
-        .map-side .back {
-            background-image: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/back.png");
-        }
-
-        .map-side.side-1 {
-            left: 0;
-            margin-left: 1.5px;
-            z-index: 4;
-        }
-
-        .map-side.side-2 {
-            left: 50%;
-            margin-left: -2px;
-            z-index: 4;
-        }
-
-        .map-side.side-3 {
-            left: 0;
-            margin-left: 3px;
-            z-index: 3;
-        }
-
-        .map-side.side-3 .back {
-            transform: rotateY(180deg);
-        }
-
-        .map-side.side-4 {
-            left: 50%;
-            margin-left: -1px;
-            z-index: 3;
-        }
-
-        .map-side.side-4 .back {
-            transform: rotateY(180deg);
-        }
-
-        .map-side.side-5 {
-            left: 0;
-            z-index: 6;
-        }
-
-        .map-side.side-5 .back {
-            background-image: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/1.png");
-        }
-
-        .map-side.side-6 {
-            left: 50%;
-            z-index: 6;
-        }
-
-        .map-side.side-6 .front {
-            background-size: 99.5%;
-        }
-
-        .map-side.side-6 .back {
-            background-image: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/17.png");
-        }
-
-        /* Scroll Names & Footsteps */
-        .scroll-name {
-            position: absolute;
-            bottom: 105px;
-            left: -60px;
-            width: 150px;
-            height: 30px;
-            font-family: 'Satisfy', cursive;
-            font-size: 14px;
-            text-align: center;
-            background: url("https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/scroll.svg") center center / cover;
-            z-index: 15;
-            color: var(--map-brown);
-            cursor: default;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .scroll-name p {
-            display: inline-block;
-            margin: 4px 0 0 15px;
-            font-weight: bold;
-        }
-
-        .footstep {
-            position: absolute;
-            background: var(--map-brown);
-            width: 6px;
-            height: 12px;
-            border-radius: 80% 80% 70% 70% / 130% 130% 25% 25%;
-            z-index: 15;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .footstep::before {
-            content: "";
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            top: 110%;
-            left: 0px;
-            background: var(--map-brown);
-            border-radius: 0 0 100% 100%;
-        }
-
-        .footstep.left {
-            transform: rotate(5deg);
-        }
-
-        .footstep.right {
-            transform: rotate(-3deg) translateY(15px) translateX(10px);
-        }
-
-        .footsteps-1 .footstep.left {
-            bottom: 150px;
-            left: 18px;
-            transform: rotate(35deg);
-        }
-
-        .footsteps-1 .footstep.right {
-            bottom: 150px;
-            left: 28px;
-            transform: rotate(30deg);
-        }
-
-        .footsteps-2 .footstep.left {
-            bottom: 285px;
-            left: 280px;
-            transform: rotate(-90deg);
-        }
-
-        .footsteps-2 .footstep.right {
-            bottom: 275px;
-            left: 285px;
-            transform: rotate(-85deg);
-        }
-
-        .footsteps-2 .scroll-name {
-            bottom: 300px;
-            left: 220px;
-        }
-
-        /* Map Active (Unfolded State) */
-        .map-base.active .flap--1 {
-            transform: rotateX(180deg);
-            transform-origin: top center;
-            transition: 0.6s transform 1.5s;
-        }
-
-        .map-base.active .flap--2 {
-            transform: rotateX(180deg);
-            transform-origin: bottom center;
-            transition: 0.6s transform 1.8s;
-        }
-
-        .map-base.active .side-1 {
-            transform-origin: center left;
-            transform: rotateY(180deg) skewY(2deg);
-            transition: 0.5s all ease-in-out 0.6s;
-        }
-
-        .map-base.active .side-1 .front {
-            transform: rotateY(180deg);
-        }
-
-        .map-base.active .side-2 {
-            transform: rotateY(180deg) skewY(-2deg);
-            transform-origin: center right;
-            transition: 0.5s all ease-in-out 0.6s;
-        }
-
-        .map-base.active .side-2 .front {
-            transform: rotateY(180deg);
-        }
-
-        .map-base.active .side-3 {
-            left: -50%;
-            transform: skewY(2deg) translateX(-100%);
-            top: 8px;
-            transition: 0.5s transform ease 0.8s, 0.3s left ease 0.8s, 0.5s top ease 0.8s;
-        }
-
-        .map-base.active .side-4 {
-            left: 100%;
-            transform: skewY(-2deg) translateX(100%);
-            top: 8px;
-            margin-left: -7px;
-            transition: 0.5s transform ease 0.8s, 0.3s left ease 0.8s, 0.5s top ease 0.8s, 0.5s margin ease 0.8s;
-        }
-
-        .map-base.active .side-5 {
-            left: -100%;
-            transform-origin: center left;
-            transform: rotateY(180deg);
-            transition: 0.5s transform, 0.7s left 0.8s, 0.2s margin 0.8s;
-            top: 0px;
-            margin-left: 4px;
-        }
-
-        .map-base.active .side-5 .front {
-            transform: rotateY(180deg);
-            transition: 0.1s transform;
-        }
-
-        .map-base.active .side-6 {
-            left: 150%;
-            transform: rotateY(180deg);
-            transform-origin: center right;
-            margin-left: -8px;
-            transition: 0.5s transform 0.3s, 0.7s left 0.8s, 0.5s top 0.8s, 0.5s margin 0.8s;
-        }
-
-        .map-base.active .side-6 .front {
-            transform: rotateY(180deg);
-            transition: 0.1s transform;
-        }
-
-        .map-base.active .footstep,
-        .map-base.active .scroll-name {
-            opacity: 1;
-            transition: 0.5s opacity 2.5s;
-        }
-
-        .map-base.active .footsteps-1 .footstep {
-            animation: 15s footsteps-1 ease 3s forwards;
-        }
-
-        .map-base.active .footsteps-1 .scroll-name {
-            animation: 15s scroll-1 ease 3s forwards;
-        }
-
-        .map-base.active .footsteps-2 .footstep {
-            animation: 15s footsteps-2 ease 3.2s forwards;
-        }
-
-        .map-base.active .footsteps-2 .scroll-name {
-            animation: 15s scroll-2 ease 3.2s forwards;
-        }
-
-        /* Keyframes */
-        @keyframes footsteps-1 {
-            10% {
-                transform: translate(8px, -15px) rotate(30deg);
-            }
-
-            20% {
-                transform: translate(30px, -45px) rotate(30deg);
-            }
-
-            30% {
-                transform: translate(40px, -75px) rotate(20deg);
-            }
-
-            40% {
-                transform: translate(45px, -100px) rotate(10deg);
-            }
-
-            50% {
-                transform: translate(50px, -125px) rotate(10deg);
-            }
-
-            60% {
-                transform: translate(50px, -135px) rotate(10deg);
-            }
-
-            100% {
-                transform: translate(50px, -135px) rotate(20deg);
-            }
-        }
-
-        @keyframes footsteps-2 {
-            0% {}
-
-            80% {
-                transform: translate(-170px, -25px) rotate(-90deg);
-            }
-
-            100% {
-                transform: translate(-180px, -25px) rotate(-90deg);
-            }
-        }
-
-        @keyframes scroll-1 {
-            10% {
-                transform: translate(8px, -15px);
-            }
-
-            20% {
-                transform: translate(30px, -45px);
-            }
-
-            30% {
-                transform: translate(40px, -75px);
-            }
-
-            40% {
-                transform: translate(45px, -100px);
-            }
-
-            50% {
-                transform: translate(50px, -125px);
-            }
-
-            60% {
-                transform: translate(50px, -135px);
-            }
-
-            100% {
-                transform: translate(50px, -135px);
-            }
-        }
-
-        @keyframes scroll-2 {
-            0% {}
-
-            80% {
-                transform: translate(-170px, -25px);
-            }
-
-            100% {
-                transform: translate(-180px, -25px);
-            }
-        }
-
-        /* ================= MAP MEMORY TOKENS (PICTURES ON THE MAP) ================= */
-        /* Coordinates of the 6 memories across the unfolded panels (dead-center on each 152px wing) */
-        .map-memory-token {
-            position: absolute;
-            z-index: 25;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: opacity 0.5s ease 2.2s, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            user-select: none;
-            width: 90px;
-        }
-
-        .map-base.active .map-memory-token {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .map-memory-token:hover,
-        .map-memory-token.focused-token {
-            transform: translateX(-50%) translateY(-8px) scale(1.18);
-            z-index: 35;
-        }
-
-        .token-seal-frame {
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            border: 2px solid var(--gold-bright);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.95), 0 0 14px rgba(223, 162, 44, 0.7);
-            overflow: hidden;
-            position: relative;
-            background: #1a0507;
-        }
-
-        .token-seal-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(20%) contrast(1.15);
-            transition: filter 0.3s ease, transform 0.3s ease;
-        }
-
-        .map-memory-token:hover .token-seal-frame img,
-        .map-memory-token.focused-token .token-seal-frame img {
-            filter: sepia(0%) contrast(1.25);
-            transform: scale(1.12);
-        }
-
-        .token-compass-pulse {
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 1.5px dashed var(--gold-bright);
-            pointer-events: none;
-            animation: rotateCompass 12s linear infinite;
-        }
-
-        @keyframes rotateCompass {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .token-banner-label {
-            margin-top: 5px;
-            background: rgba(30, 8, 10, 0.95);
-            border: 1px solid var(--gold-antique);
-            color: #ffe6a0;
-            font-family: 'SOV Yoona', 'Samphan Condensed', 'Noto Serif Thai', serif;
-            font-size: 1.05rem;
-            padding: 2px 10px;
-            border-radius: 8px;
-            white-space: nowrap;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.85);
-            pointer-events: none;
-            letter-spacing: 0.3px;
-            text-align: center;
-        }
-
-        .token-banner-label .label-en {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive, serif;
-            font-size: 1.05rem;
-            display: block;
-            font-weight: 600;
-        }
-
-        .token-inspect-hint {
-            font-family: 'SOV Yoona', 'Noto Serif Thai', serif;
-            font-size: 0.95rem;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            background: rgba(80, 10, 15, 0.95);
-            border: 1px solid var(--gold-bright);
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-top: 3px;
-            white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
-        }
-
-        .map-memory-token:hover .token-inspect-hint,
-        .map-memory-token.focused-token .token-inspect-hint {
-            opacity: 1;
-        }
-
-        /* Vertical Top coordinates for each wing */
-        .map-side.side-5 .map-memory-token.token-0 {
-            top: 180px;
-        }
-
-        .map-side.side-3 .map-memory-token.token-1 {
-            top: 290px;
-        }
-
-        .map-side.side-1 .map-memory-token.token-3 {
-            top: 160px;
-        }
-
-        .map-side.side-2 .map-memory-token.token-4 {
-            top: 360px;
-        }
-
-        .map-side.side-4 .map-memory-token.token-2 {
-            top: 200px;
-        }
-
-        .map-side.side-6 .map-memory-token.token-5 {
-            top: 300px;
-        }
-
-
-        /* ==========================================================================
-           ENCHANTED OPEN BOOK (GRIMOIRE) MODAL & PURE MARAUDER'S MAP STYLES
-           Consistent Typography (SOV Yoona & Sarun HarryPotter) + 3D Page Turn Animation
-           ========================================================================== */
-
-        /* Marauder's Spell Ribbon Bar */
-        .marauder-spell-ribbon-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px auto 25px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .marauder-ribbon-btn {
-            background: radial-gradient(ellipse at center, rgba(55, 12, 16, 0.95) 0%, rgba(20, 2, 4, 0.95) 100%);
-            border: 2px solid var(--gold-antique);
-            border-radius: 40px;
-            color: #ffe6a0;
-            padding: 10px 30px;
-            font-family: 'Sarun HarryPotter', 'SOV Yoona', 'Noto Serif Thai', cursive, serif;
-            font-size: 1.55rem;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 14px;
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.85),
-                0 0 20px rgba(223, 162, 44, 0.35),
-                inset 0 0 15px rgba(255, 215, 0, 0.15);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            user-select: none;
-        }
-
-        .marauder-ribbon-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            border-color: var(--gold-bright);
-            color: #ffffff;
-            box-shadow:
-                0 14px 32px rgba(0, 0, 0, 0.95),
-                0 0 35px rgba(223, 162, 44, 0.65),
-                inset 0 0 25px rgba(255, 215, 0, 0.3);
-        }
-
-        .ribbon-wand-icon {
-            font-size: 1.3rem;
-            color: var(--gold-bright);
-            animation: wandPulse 2s infinite ease-in-out;
-        }
-
-        @keyframes wandPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 4px #ffd000);
-            }
-
-            50% {
-                transform: scale(1.25);
-                filter: drop-shadow(0 0 12px #fffaaa);
-            }
-        }
-
-        .ribbon-sub {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive, serif;
-            font-size: 1.1rem;
-            color: #d8be8d;
-            font-style: italic;
-            border-left: 1.5px solid rgba(223, 162, 44, 0.4);
-            padding-left: 14px;
-            margin-left: 4px;
-        }
-
-        /* -------------------------------------------------------------
-           ENCHANTED OPEN BOOK (GRIMOIRE) MODAL
-           ------------------------------------------------------------- */
-        .enchanted-book-scrim {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(14, 2, 4, 0.88) 0%, rgba(4, 0, 1, 0.96) 100%);
-            backdrop-filter: blur(10px);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            padding: 20px;
-        }
-
-        .enchanted-book-scrim.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .book-modal-wrapper {
-            perspective: 2500px;
-            width: 100%;
-            max-width: 980px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* The Hardcover 3D Open Tome */
-        .magical-open-tome {
-            position: relative;
-            width: 100%;
-            border-radius: 12px;
-            transform: scale(0.85) rotateX(10deg);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 0.4s ease;
-            box-shadow:
-                0 35px 85px rgba(0, 0, 0, 0.95),
-                0 0 55px rgba(223, 162, 44, 0.3);
-        }
-
-        .enchanted-book-scrim.active .magical-open-tome {
-            transform: scale(1) rotateX(0deg);
-            opacity: 1;
-            animation: tomeOpenFromSpine 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-        }
-
-        @keyframes tomeOpenFromSpine {
-            0% {
-                opacity: 0;
-                transform: perspective(2500px) scale(0.7) rotateX(14deg) rotateY(-8deg);
-            }
-
-            70% {
-                opacity: 1;
-                transform: perspective(2500px) scale(1.02) rotateX(-2deg) rotateY(1deg);
-            }
-
-            100% {
-                opacity: 1;
-                transform: perspective(2500px) scale(1) rotateX(0deg) rotateY(0deg);
-            }
-        }
-
-        /* Leather Hardcover Backing */
-        .tome-leather-cover {
-            position: absolute;
-            inset: -14px -16px;
-            background:
-                radial-gradient(ellipse at 50% 50%, #3e090f 0%, #1c0205 100%);
-            border-radius: 14px;
-            border: 2px solid rgba(223, 162, 44, 0.7);
-            box-shadow:
-                inset 0 0 40px rgba(0, 0, 0, 0.9),
-                0 15px 35px rgba(0, 0, 0, 0.85);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Gilded Brass Corner Plates on Leather Cover */
-        .tome-corner {
-            position: absolute;
-            width: 38px;
-            height: 38px;
-            border: 3px solid var(--gold-bright);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-            pointer-events: none;
-        }
-
-        .tome-corner.topleft {
-            top: 6px;
-            left: 6px;
-            border-right: none;
-            border-bottom: none;
-            border-top-left-radius: 8px;
-        }
-
-        .tome-corner.topright {
-            top: 6px;
-            right: 6px;
-            border-left: none;
-            border-bottom: none;
-            border-top-right-radius: 8px;
-        }
-
-        .tome-corner.bottomleft {
-            bottom: 6px;
-            left: 6px;
-            border-right: none;
-            border-top: none;
-            border-bottom-left-radius: 8px;
-        }
-
-        .tome-corner.bottomright {
-            bottom: 6px;
-            right: 6px;
-            border-left: none;
-            border-top: none;
-            border-bottom-right-radius: 8px;
-        }
-
-        /* Hanging Silk Bookmark Ribbon */
-        .tome-silk-bookmark {
-            position: absolute;
-            bottom: -46px;
-            left: calc(50% - 14px);
-            width: 28px;
-            height: 60px;
-            background: linear-gradient(to right, #7a0810, #ba1622 45%, #6a050d 100%);
-            border-bottom: 2px solid var(--gold-bright);
-            clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        /* Two-Page Open Parchment Spread with 3D Perspective Gutter */
-        .tome-spread {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            background: #eddcb8;
-            border-radius: 6px;
-            overflow: hidden;
-            min-height: 530px;
-            box-shadow: inset 0 0 35px rgba(80, 40, 10, 0.35);
-            perspective: 1800px;
-            transform-style: preserve-3d;
-        }
-
-        /* Individual Page */
-        .tome-page {
-            flex: 1;
-            padding: 34px 38px 28px;
-            position: relative;
-            background: radial-gradient(ellipse at 50% 30%, #fbf3df 0%, #edd9b2 65%, #ddc497 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
-        }
-
-        .tome-page.left-page {
-            box-shadow: inset -22px 0 26px -12px rgba(60, 30, 8, 0.45);
-            border-right: 1px solid rgba(138, 92, 40, 0.2);
-            transform-origin: right center;
-        }
-
-        .tome-page.right-page {
-            box-shadow: inset 22px 0 26px -12px rgba(60, 30, 8, 0.45);
-            border-left: 1px solid rgba(138, 92, 40, 0.2);
-            transform-origin: left center;
-        }
-
-        /* =============================================================
-           3D REALISTIC PAGE-TURNING ANIMATIONS (NEXT & PREV FLIP)
-           ============================================================= */
-
-        /* FLIP NEXT (Turning right page towards left) */
-        .tome-spread.flip-next .right-page {
-            animation: flipRightPageNext 0.48s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
-        }
-
-        .tome-spread.flip-next .left-page {
-            animation: settleLeftPageNext 0.48s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-        }
-
-        @keyframes flipRightPageNext {
-            0% {
-                transform: rotateY(0deg);
-                box-shadow: inset 22px 0 26px -12px rgba(60, 30, 8, 0.45);
-                filter: brightness(1);
-            }
-
-            45% {
-                transform: rotateY(-60deg) scale(0.96);
-                box-shadow: inset 60px 0 45px rgba(35, 12, 4, 0.65);
-                filter: brightness(0.85);
-            }
-
-            100% {
-                transform: rotateY(-90deg) scale(0.92);
-                box-shadow: inset 100px 0 60px rgba(20, 5, 0, 0.85);
-                opacity: 0.15;
-                filter: brightness(0.7);
-            }
-        }
-
-        @keyframes settleLeftPageNext {
-            0% {
-                opacity: 0.5;
-                transform: scale(0.97) translateX(10px);
-                filter: brightness(0.9);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateX(0);
-                filter: brightness(1);
-            }
-        }
-
-        /* FLIP PREV (Turning left page towards right) */
-        .tome-spread.flip-prev .left-page {
-            animation: flipLeftPagePrev 0.48s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
-        }
-
-        .tome-spread.flip-prev .right-page {
-            animation: settleRightPagePrev 0.48s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-        }
-
-        @keyframes flipLeftPagePrev {
-            0% {
-                transform: rotateY(0deg);
-                box-shadow: inset -22px 0 26px -12px rgba(60, 30, 8, 0.45);
-                filter: brightness(1);
-            }
-
-            45% {
-                transform: rotateY(60deg) scale(0.96);
-                box-shadow: inset -60px 0 45px rgba(35, 12, 4, 0.65);
-                filter: brightness(0.85);
-            }
-
-            100% {
-                transform: rotateY(90deg) scale(0.92);
-                box-shadow: inset -100px 0 60px rgba(20, 5, 0, 0.85);
-                opacity: 0.15;
-                filter: brightness(0.7);
-            }
-        }
-
-        @keyframes settleRightPagePrev {
-            0% {
-                opacity: 0.5;
-                transform: scale(0.97) translateX(-10px);
-                filter: brightness(0.9);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateX(0);
-                filter: brightness(1);
-            }
-        }
-
-        /* Settle In Glow effect upon page arrival */
-        .tome-spread.page-settled .tome-page {
-            animation: pageArriveGlow 0.4s ease-out;
-        }
-
-        @keyframes pageArriveGlow {
-            0% {
-                box-shadow: inset 0 0 40px rgba(243, 199, 102, 0.45);
-            }
-
-            100% {
-                box-shadow: inset 0 0 0px transparent;
-            }
-        }
-
-        /* Center Spine Gutter Crease */
-        .tome-spine-gutter {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 32px;
-            transform: translateX(-50%);
-            background: linear-gradient(to right,
-                    rgba(35, 15, 5, 0.45) 0%,
-                    rgba(20, 8, 2, 0.65) 45%,
-                    rgba(10, 3, 0, 0.75) 50%,
-                    rgba(20, 8, 2, 0.65) 55%,
-                    rgba(35, 15, 5, 0.45) 100%);
-            pointer-events: none;
-            z-index: 8;
-        }
-
-        .spine-line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 1px;
-            background: rgba(223, 162, 44, 0.4);
-        }
-
-        /* Page Corner Ornamental Flourishes */
-        .page-corner-flourish {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            border: 1.5px solid rgba(138, 92, 40, 0.5);
-            pointer-events: none;
-        }
-
-        .page-corner-flourish.tl {
-            top: 12px;
-            left: 12px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .page-corner-flourish.bl {
-            bottom: 12px;
-            left: 12px;
-            border-right: none;
-            border-top: none;
-        }
-
-        .page-corner-flourish.tr {
-            top: 12px;
-            right: 12px;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .page-corner-flourish.br {
-            bottom: 12px;
-            right: 12px;
-            border-left: none;
-            border-top: none;
-        }
-
-        /* Left Page Content: Photo & Framing */
-        .memory-plate-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1.5px solid rgba(138, 92, 40, 0.35);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-        }
-
-        .plate-num {
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive, serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #7a151e;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-        }
-
-        .plate-tag {
-            font-family: 'SOV Yoona', 'Noto Serif Thai', serif;
-            font-size: 1.1rem;
-            color: #5c3818;
-            letter-spacing: 0.3px;
-        }
-
-        /* Living Photo Frame with Antique Photo Mount Corners */
-        .living-photo-frame {
-            position: relative;
-            width: 100%;
-            height: 275px;
-            border-radius: 4px;
-            background: #1a0407;
-            padding: 8px;
-            box-shadow:
-                0 10px 25px rgba(0, 0, 0, 0.7),
-                inset 0 0 20px rgba(0, 0, 0, 0.9);
-            border: 1.5px solid rgba(138, 92, 40, 0.6);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .living-memory-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 2px;
-            filter: sepia(18%) contrast(1.1) brightness(0.96);
-            transition: filter 0.5s ease, transform 0.5s ease;
-        }
-
-        .living-photo-frame:hover .living-memory-img {
-            filter: sepia(0%) contrast(1.18) brightness(1.03);
-            transform: scale(1.03);
-        }
-
-        /* Photo Brass Mount Corners */
-        .photo-corner {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border: 3px solid var(--gold-bright);
-            z-index: 5;
-            pointer-events: none;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
-        }
-
-        .photo-corner.pc-tl {
-            top: 4px;
-            left: 4px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .photo-corner.pc-tr {
-            top: 4px;
-            right: 4px;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .photo-corner.pc-bl {
-            bottom: 4px;
-            left: 4px;
-            border-right: none;
-            border-top: none;
-        }
-
-        .photo-corner.pc-br {
-            bottom: 4px;
-            right: 4px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .photo-ambient-vignette {
-            position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 35px rgba(20, 4, 6, 0.7);
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .photo-magic-sheen {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(255, 240, 180, 0.18) 50%, transparent 60%);
-            background-size: 200% 200%;
-            pointer-events: none;
-            z-index: 4;
-            animation: magicSheen 6s infinite ease-in-out;
-        }
-
-        @keyframes magicSheen {
-            0% {
-                background-position: -100% -100%;
-            }
-
-            50% {
-                background-position: 100% 100%;
-            }
-
-            100% {
-                background-position: 200% 200%;
-            }
-        }
-
-        /* Memory Caption Box */
-        .memory-caption-box {
-            text-align: center;
-            margin-top: 14px;
-        }
-
-        .caption-title {
-            font-family: 'Sarun HarryPotter', 'Harry Potter', cursive;
-            font-size: 1.95rem;
-            color: #3b1b0b;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-            text-shadow: 0 1px 2px rgba(255, 235, 180, 0.5);
-        }
-
-        .caption-stamp {
-            font-family: 'Cinzel', 'Sarun HarryPotter', serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: #8c5722;
-            font-weight: 700;
-        }
-
-        /* Page Flip Navigation Buttons */
-        .tome-page-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1.5px solid rgba(138, 92, 40, 0.35);
-            padding-top: 12px;
-            margin-top: 14px;
-        }
-
-        .tome-nav-btn {
-            background: rgba(60, 20, 10, 0.08);
-            border: 1.5px solid rgba(138, 92, 40, 0.55);
-            border-radius: 8px;
-            padding: 6px 16px;
-            color: #5c2415;
-            font-family: 'SOV Yoona', 'Sarun HarryPotter', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.25s ease;
-            user-select: none;
-        }
-
-        .tome-nav-btn:hover {
-            background: #7a151e;
-            color: #ffffff;
-            border-color: #7a151e;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .tome-page-counter {
-            font-family: 'Cinzel', 'Sarun HarryPotter', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #8c5722;
-            letter-spacing: 1.5px;
-        }
-
-        /* Right Page Content: Journal & Story */
-        .close-tome-btn {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: #7a151e;
-            color: #ffe6a0;
-            border: 1.5px solid var(--gold-antique);
-            border-radius: 20px;
-            padding: 5px 16px;
-            font-family: 'SOV Yoona', 'Sarun HarryPotter', serif;
-            font-size: 1.05rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
-            transition: all 0.25s ease;
-            z-index: 10;
-        }
-
-        .close-tome-btn:hover {
-            background: #a31c28;
-            color: #ffffff;
-            border-color: var(--gold-bright);
-            transform: scale(1.06);
-            box-shadow: 0 5px 14px rgba(122, 21, 30, 0.5);
-        }
-
-        .journal-header {
-            margin-top: 10px;
-            margin-bottom: 12px;
-        }
-
-        .journal-latin-sub {
-            font-family: 'Cinzel', 'Sarun HarryPotter', serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            color: #8c5722;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .journal-title {
-            font-family: 'Sarun HarryPotter', 'Harry Potter', cursive;
-            font-size: 2.2rem;
-            color: #630c14;
-            line-height: 1.25;
-            margin: 0;
-            text-shadow: 1px 1px 0 rgba(255, 235, 180, 0.4);
-        }
-
-        .journal-rule-divider {
-            height: 2px;
-            background: linear-gradient(to right, #8c5722, rgba(140, 87, 34, 0.2) 80%, transparent 100%);
-            margin-top: 8px;
-        }
-
-        /* Journal Body Text & Drop Cap matching Information & Home tab */
-        .journal-body-content {
-            flex: 1;
-            overflow-y: auto;
-            max-height: 285px;
-            padding-right: 8px;
-            margin-bottom: 12px;
-        }
-
-        .journal-body-content::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .journal-body-content::-webkit-scrollbar-thumb {
-            background: rgba(138, 92, 40, 0.4);
-            border-radius: 4px;
-        }
-
-        .illuminated-text-wrap {
-            font-family: 'SOV Yoona', 'Samphan Condensed', 'Noto Serif Thai', serif;
-            font-size: 1.4rem;
-            color: #1f0f04;
-            line-height: 2.15;
-            letter-spacing: 0.35px;
-            text-align: justify;
-        }
-
-        .drop-cap {
-            float: left;
-            font-family: 'Sarun HarryPotter', 'Cinzel', cursive, serif;
-            font-size: 3.6rem;
-            line-height: 0.78;
-            padding-top: 6px;
-            padding-right: 12px;
-            padding-bottom: 2px;
-            color: #800a12;
-            font-weight: 900;
-            text-shadow: 1px 1px 0 #ebd09e, 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Journal Footer: Signature & Wax Seal */
-        .journal-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1.5px solid rgba(138, 92, 40, 0.35);
-            padding-top: 10px;
-        }
-
-        .journal-signature {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sig-label {
-            font-family: 'SOV Yoona', 'Noto Serif Thai', serif;
-            font-size: 0.95rem;
-            color: #7a4a20;
-            font-style: italic;
-        }
-
-        .sig-name {
-            font-family: 'Satisfy', 'Lobster Two', 'Cinzel', cursive;
-            font-size: 1.85rem;
-            color: #630c14;
-            letter-spacing: 0.5px;
-            font-weight: normal;
-        }
-
-        .tome-wax-seal-badge {
-            width: 50px;
-            height: 58px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-            transition: transform 0.3s ease;
-        }
-
-        .tome-wax-seal-badge:hover {
-            transform: scale(1.15) rotate(4deg);
-        }
-
-        .tome-wax-seal-badge img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* -------------------------------------------------------------
-           RESPONSIVE OPEN BOOK (Mobile & Tablet)
-           ------------------------------------------------------------- */
-        @media (max-width: 860px) {
-            .tome-spread {
-                flex-direction: column;
-                min-height: auto;
-            }
-
-            .tome-spine-gutter {
-                display: none;
-            }
-
-            .tome-page.left-page {
-                box-shadow: none;
-                border-right: none;
-                border-bottom: 2px solid rgba(138, 92, 40, 0.4);
-                padding: 24px 20px 18px;
-            }
-
-            .tome-page.right-page {
-                box-shadow: none;
-                border-left: none;
-                padding: 20px 20px 24px;
-            }
-
-            .living-photo-frame {
-                height: 220px;
-            }
-
-            .journal-body-content {
-                max-height: none;
-            }
-
-            .marauder-ribbon-btn {
-                font-size: 1.25rem;
-                padding: 8px 20px;
-            }
-
-            .ribbon-sub {
-                display: none;
-            }
-        }
-
-
         /* ===== TAB 4: ABOUT ===== */
         .about-scroll-container {
             padding: 40px;
             display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 55px;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
         }
 
         .rules-tome-block {
@@ -4042,15 +2111,8 @@
         }
 
         @keyframes gryffAuraPulse {
-            0% {
-                transform: scale(0.96);
-                opacity: 0.75;
-            }
-
-            100% {
-                transform: scale(1.06);
-                opacity: 1;
-            }
+            0% { transform: scale(0.96); opacity: 0.75; }
+            100% { transform: scale(1.06); opacity: 1; }
         }
 
         /* Layered Depth Card 2 (Deep Velvet & Gold Rim on the right) */
@@ -4061,7 +2123,7 @@
             border-radius: 24px;
             background: linear-gradient(135deg, rgba(88, 8, 16, 0.92) 0%, rgba(30, 3, 6, 0.96) 65%, #0f0102 100%);
             border: 1.5px solid rgba(255, 215, 0, 0.35);
-            box-shadow:
+            box-shadow: 
                 0 25px 60px rgba(0, 0, 0, 0.96),
                 0 0 25px rgba(223, 162, 44, 0.22);
             pointer-events: none;
@@ -4079,7 +2141,7 @@
             overflow: hidden;
             background: linear-gradient(160deg, #fff6dd 0%, #f6d683 22%, #e29f25 46%, #9e1824 76%, #330206 100%);
             border: 2px solid rgba(223, 162, 44, 0.6);
-            box-shadow:
+            box-shadow: 
                 0 22px 55px rgba(0, 0, 0, 0.95),
                 0 0 30px rgba(223, 162, 44, 0.3),
                 0 0 45px rgba(180, 20, 30, 0.35);
@@ -4119,7 +2181,7 @@
 
         .hero-stage-container:hover .hero-depth-card-1 {
             transform: rotate(-8.5deg) translate(-32px, -6px);
-            box-shadow:
+            box-shadow: 
                 0 28px 65px rgba(0, 0, 0, 0.98),
                 0 0 35px rgba(223, 162, 44, 0.45);
         }
@@ -4150,7 +2212,7 @@
             overflow: hidden;
             background: #ffffff;
             border: 2px solid rgba(223, 162, 44, 0.75);
-            box-shadow:
+            box-shadow: 
                 0 25px 65px rgba(0, 0, 0, 0.98),
                 0 0 30px rgba(223, 162, 44, 0.35),
                 0 0 15px rgba(180, 20, 30, 0.25),
@@ -4160,7 +2222,7 @@
 
         .hero-stage-container:hover .hero-portrait-card {
             border-color: rgba(255, 215, 0, 0.9);
-            box-shadow:
+            box-shadow: 
                 0 30px 75px rgba(0, 0, 0, 1),
                 0 0 45px rgba(223, 162, 44, 0.55),
                 0 0 25px rgba(243, 194, 82, 0.4),
@@ -4202,13 +2264,8 @@
         }
 
         @keyframes cardShimmerSweep {
-            0% {
-                background-position: 200% 0;
-            }
-
-            100% {
-                background-position: -200% 0;
-            }
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         /* Floating Gryffindor Badges - Adapted & Elevated */
@@ -4224,8 +2281,8 @@
             display: flex;
             align-items: center;
             gap: 7px;
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.9),
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.9), 
                 0 0 16px rgba(223, 162, 44, 0.4),
                 inset 0 0 0 1px rgba(255, 235, 140, 0.25);
             font-family: 'Cinzel', serif;
@@ -4262,8 +2319,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow:
-                0 10px 28px rgba(0, 0, 0, 0.92),
+            box-shadow: 
+                0 10px 28px rgba(0, 0, 0, 0.92), 
                 0 0 20px rgba(223, 162, 44, 0.4),
                 inset 0 0 0 1px rgba(255, 235, 140, 0.3);
             font-family: 'Cinzel', serif;
@@ -4324,8 +2381,7 @@
                 height: 400px;
             }
 
-            .hero-artwork-wrapper,
-            .hero-portrait-card {
+            .hero-artwork-wrapper, .hero-portrait-card {
                 width: 280px;
                 height: 400px;
             }
@@ -4846,7 +2902,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. แท่นรองแผงไม้โอ๊คโบราณพร้อมลายน้ำสิงโตกริฟฟินดอร์ (Aged Dark Oak Plinth & Lion Watermark) -->
+                                        <!-- 4. แท่นรองแผงไม้โอ๊คโบราณพร้อมลายน้ำสิงโตกริฟฟินดอร์ (Aged Dark Oak Plinth & Lion Watermark) -->
                     <div class="grimoire-plinth-panel">
                         <!-- ลายน้ำสิงโตกริฟฟินดอร์จางๆ (~13% Opacity) -->
                         <div class="plinth-lion-watermark" aria-hidden="true"></div>
@@ -4854,31 +2910,17 @@
                         <!-- แถบคิ้วทองเหลืองสลักหัวข้อแท่น -->
                         <div class="plinth-header-bar">
                             <span class="plinth-header-line"></span>
-                            <span class="plinth-header-text">✦ Gryffindor Grimoire Archive • บันทึกคัมภีร์เวทมนตร์
-                                ✦</span>
+                            <span class="plinth-header-text">✦ Gryffindor Grimoire Archive • บันทึกคัมภีร์เวทมนตร์ ✦</span>
                             <span class="plinth-header-line"></span>
                         </div>
 
                         <div class="spell-topics-grid">
                             <!-- บทที่ 1: ประวัติความเป็นมา -->
-                            <button class="grimoire-btn" onclick="openScroll('history')"
-                                title="เปิดอ่านบทที่ 1: ประวัติความเป็นมา">
-                                <svg class="btn-filigree top-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree top-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
+                            <button class="grimoire-btn" onclick="openScroll('history')" title="เปิดอ่านบทที่ 1: ประวัติความเป็นมา">
+                                <svg class="btn-filigree top-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree top-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
                                 <span class="roman-seal">I</span>
                                 <span class="btn-content">
                                     <span class="btn-title">ประวัติความเป็นมา</span>
@@ -4887,24 +2929,11 @@
                             </button>
 
                             <!-- บทที่ 2: สิ่งที่โปรดปราน -->
-                            <button class="grimoire-btn" onclick="openScroll('likes')"
-                                title="เปิดอ่านบทที่ 2: สิ่งที่โปรดปราน">
-                                <svg class="btn-filigree top-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree top-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
+                            <button class="grimoire-btn" onclick="openScroll('likes')" title="เปิดอ่านบทที่ 2: สิ่งที่โปรดปราน">
+                                <svg class="btn-filigree top-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree top-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
                                 <span class="roman-seal">II</span>
                                 <span class="btn-content">
                                     <span class="btn-title">สิ่งที่โปรดปราน</span>
@@ -4913,24 +2942,11 @@
                             </button>
 
                             <!-- บทที่ 3: สิ่งที่ไม่พึงใจ -->
-                            <button class="grimoire-btn" onclick="openScroll('dislikes')"
-                                title="เปิดอ่านบทที่ 3: สิ่งที่ไม่พึงใจ">
-                                <svg class="btn-filigree top-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree top-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
+                            <button class="grimoire-btn" onclick="openScroll('dislikes')" title="เปิดอ่านบทที่ 3: สิ่งที่ไม่พึงใจ">
+                                <svg class="btn-filigree top-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree top-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
                                 <span class="roman-seal">III</span>
                                 <span class="btn-content">
                                     <span class="btn-title">สิ่งที่ไม่พึงใจ</span>
@@ -4939,24 +2955,11 @@
                             </button>
 
                             <!-- บทที่ 4: อุปกรณ์เวทมนตร์และทักษะพิเศษ (เต็ม 2 คอลัมน์) -->
-                            <button class="grimoire-btn full-span" onclick="openScroll('magic')"
-                                title="เปิดอ่านบทที่ 4: อุปกรณ์เวทมนตร์และทักษะพิเศษ">
-                                <svg class="btn-filigree top-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree top-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
+                            <button class="grimoire-btn full-span" onclick="openScroll('magic')" title="เปิดอ่านบทที่ 4: อุปกรณ์เวทมนตร์และทักษะพิเศษ">
+                                <svg class="btn-filigree top-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree top-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
                                 <span class="roman-seal">IV</span>
                                 <span class="btn-content">
                                     <span class="btn-title">อุปกรณ์เวทมนตร์และทักษะพิเศษ</span>
@@ -4965,24 +2968,11 @@
                             </button>
 
                             <!-- บทที่ 5: บันทึกลับฮอกวอตส์ -->
-                            <button class="grimoire-btn" onclick="openScroll('others')"
-                                title="เปิดอ่านบทที่ 5: บันทึกลับฮอกวอตส์">
-                                <svg class="btn-filigree top-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree top-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
-                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20">
-                                    <path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c" />
-                                    <circle cx="5" cy="5" r="1.5" fill="#ffe294" />
-                                </svg>
+                            <button class="grimoire-btn" onclick="openScroll('others')" title="เปิดอ่านบทที่ 5: บันทึกลับฮอกวอตส์">
+                                <svg class="btn-filigree top-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree top-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-left" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
+                                <svg class="btn-filigree bottom-right" viewBox="0 0 20 20"><path d="M2,2 L14,2 Q8,4 4,8 Q2,14 2,20 Z" fill="#dfa22c"/><circle cx="5" cy="5" r="1.5" fill="#ffe294"/></svg>
                                 <span class="roman-seal">V</span>
                                 <span class="btn-content">
                                     <span class="btn-title">บันทึกลับฮอกวอตส์</span>
@@ -5008,171 +2998,66 @@
         </section>
 
         <!-- ================= TAB 3: GALLERY ================= -->
-        <!-- ================= TAB 3: GALLERY (IMMERSIVE MARAUDER'S MAP) ================= -->
         <section id="tab-gallery" class="tab-content">
-            <h2 class="section-ribbon-title">The Marauder's Map • แผนที่ตัวกวนแห่งฮอกวอตส์</h2>
-
-            <!-- Elegant Marauder's Incantation Spell Ribbon Bar -->
-            <div class="marauder-spell-ribbon-bar">
-                <button id="toggleMapBtn" class="marauder-ribbon-btn" onclick="toggleMarauderMap()"
-                    title="แตะเพื่อร่ายคาถาเปิด/ปิดแผนที่ 3 มิติ">
-                    <span class="ribbon-wand-icon">⚡</span>
-                    <span id="mapSpellText">แผนลวงสำเร็จแล้ว</span>
-                    <span class="ribbon-sub" id="mapSpellSub">"Mischief Managed" • แตะเพื่อพับเก็บแผนที่</span>
-                </button>
-            </div>
-
-            <!-- 3D Marauder's Map Viewport -->
-            <div class="map-viewport-wrapper">
-                <div class="map-scale-container">
-                    <div class="map-base active" id="maraudersMapBase" onclick="handleMapBaseClick(event)">
-                        <!-- Animated Marauder Footsteps & Names -->
-                        <div class="footsteps footsteps-1">
-                            <div class="footstep left"></div>
-                            <div class="footstep right"></div>
-                            <div class="scroll-name">
-                                <p>Alexan Lake</p>
-                            </div>
-                        </div>
-                        <div class="footsteps footsteps-2">
-                            <div class="footstep left"></div>
-                            <div class="footstep right"></div>
-                            <div class="scroll-name">
-                                <p>James & Sirius</p>
-                            </div>
-                        </div>
-
-                        <!-- Top Flaps (Cover) -->
-                        <div class="map-flap flap--1">
-                            <div class="map-flap__front"></div>
-                            <div class="map-flap__back"></div>
-                        </div>
-                        <div class="map-flap flap--2">
-                            <div class="map-flap__front"></div>
-                            <div class="map-flap__back"></div>
-                        </div>
-
-                        <!-- 6 Folding Sides / Castle Wings with Memory Pins -->
-                        <!-- Side 1: Left Center (Courtyard & Lake) -->
-                        <div class="map-side side-1"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/11.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-3" id="mapToken-3"
-                                    onclick="openEnchantedBook(3); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Prank Fireworks">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/alexan-profile.jpg" alt="Prank Fireworks" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Prank Fireworks</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-
-                        <!-- Side 2: Right Center (Castle Corridors & Staircases) -->
-                        <div class="map-side side-2"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/12.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-4" id="mapToken-4"
-                                    onclick="openEnchantedBook(4); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Duel Training">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/alexan-profile.jpg" alt="Duel Training" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Duel Training</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-
-                        <!-- Side 3: Mid-Left Wing (Gryffindor Tower & Battlements) -->
-                        <div class="map-side side-3"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/13.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-1" id="mapToken-1"
-                                    onclick="openEnchantedBook(1); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Winter Scarf">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/scene-2.jpg" alt="Winter Scarf" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Winter Scarf</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-
-                        <!-- Side 4: Mid-Right Wing (Quidditch Pitch & Stadium) -->
-                        <div class="map-side side-4"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/14.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-2" id="mapToken-2"
-                                    onclick="openEnchantedBook(2); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Quidditch Pitch">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/scene-3.jpg" alt="Quidditch Pitch" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Quidditch Pitch</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-
-                        <!-- Side 5: Outer Left Wing (Hogsmeade Village & Three Broomsticks) -->
-                        <div class="map-side side-5"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/15.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-0" id="mapToken-0"
-                                    onclick="openEnchantedBook(0); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Hogsmeade Stroll">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/scene-1.jpg" alt="Hogsmeade Stroll" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Hogsmeade Stroll</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-
-                        <!-- Side 6: Outer Right Wing (The Great Hall & High Sanctum) -->
-                        <div class="map-side side-6"
-                            style="--image: url('https://meowlivia.s3.us-east-2.amazonaws.com/codepen/map/16.png')">
-                            <div class="front">
-                                <div class="map-memory-token token-5" id="mapToken-5"
-                                    onclick="openEnchantedBook(5); event.stopPropagation();"
-                                    title="เปิดสมุดบันทึก: Fierce Resolve">
-                                    <div class="token-compass-pulse"></div>
-                                    <div class="token-seal-frame">
-                                        <img src="images/alexan-profile.jpg" alt="Fierce Resolve" />
-                                    </div>
-                                    <div class="token-banner-label">
-                                        <span class="label-en">Fierce Resolve</span>
-                                    </div>
-                                    <div class="token-inspect-hint">📖 เปิดสมุดบันทึก</div>
-                                </div>
-                            </div>
-                            <div class="back"></div>
-                        </div>
-                    </div>
+            <h2 class="section-ribbon-title">Gallery / รูปรวมสมุดภาพ</h2>
+            <div class="gallery-mosaic-grid">
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Hogsmeade Stroll"
+                    onclick="openGalleryItem(0)">
+                    <svg class="gallery-svg-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M11 2v4.07l-2.7-1.56-.99 1.73L10 7.8v2.2L7.8 8.87l1.43-2.48-1.73-.99L6.07 8.1 2 6v2l3.46 2L2 12v2l3.46-2L2 14v2l4.07-2.1 1.43 2.48 1.73-.99-1.27-2.2H10v2.2l-2.69 1.56.99 1.73L11 17.93V22h2v-4.07l2.7 1.56.99-1.73L14 16.2v-2.2l2.2 1.13-1.43 2.48 1.73.99 1.43-2.7L22 18v-2l-3.46-2L22 12v-2l-3.46 2L22 10V8l-4.07 2.1-1.43-2.48-1.73.99 1.27 2.2H14V8.8l2.69-1.56-.99-1.73L13 6.07V2h-2z" />
+                    </svg>
+                    <div class="gallery-art-title">Hogsmeade Stroll</div>
+                    <div class="gallery-art-desc">เดินเล่นฮอกส์มี้ดกับเพื่อน จิบเบียร์บัตเตอร์อุ่นๆ
+                        หน้าร้านไม้กวาดสามอัน</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
+                </div>
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Winter Scarf"
+                    onclick="openGalleryItem(1)">
+                    <svg class="gallery-svg-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 3C7 3 3 6 3 9c0 2 2 3.5 5 4.5V21l4-2 4 2v-7.5c3-1 5-2.5 5-4.5 0-3-4-6-9-6zm-2 14.5l-2 1v-4.8c.6.2 1.3.4 2 .6v3.2zm6 0v-3.2c.7-.2 1.4-.4 2-.6v4.8l-2-1z" />
+                    </svg>
+                    <div class="gallery-art-title">Winter Scarf</div>
+                    <div class="gallery-art-desc">พอร์ตเทรตผ้าพันคอรับลมหนาวสีแดงเลือดหมูสลับทองลายกริฟฟินดอร์</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
+                </div>
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Quidditch Pitch"
+                    onclick="openGalleryItem(2)">
+                    <svg class="gallery-svg-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M19.36 2.64a1.5 1.5 0 0 0-2.12 0L8.2 11.68l-3.54-.71a1.5 1.5 0 0 0-1.63.79l-1 1.73a1.5 1.5 0 0 0 .34 1.83l3.54 3.54-3.62 3.62 1.41 1.41 3.62-3.62 3.54 3.54a1.5 1.5 0 0 0 1.83.34l1.73-1a1.5 1.5 0 0 0 .79-1.63l-.71-3.54 9.04-9.04a1.5 1.5 0 0 0 0-2.12l-1.42-1.42z" />
+                    </svg>
+                    <div class="gallery-art-title">Quidditch Pitch</div>
+                    <div class="gallery-art-desc">ทีมสควอดสนามควิดดิชและไม้กวาดไฟเยอร์โบลด์คู่ใจ</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
+                </div>
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Prank Fireworks"
+                    onclick="openGalleryItem(3)">
+                    <svg class="gallery-svg-icon" viewBox="0 0 24 24">
+                        <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.8h7.6z" />
+                    </svg>
+                    <div class="gallery-art-title">Prank Fireworks</div>
+                    <div class="gallery-art-desc">ภาพจังหวะหน้าแดงแจ๋ตอนโดนจับได้ว่าแอบจุดประทัดควันแกล้งคน</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
+                </div>
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Duel Training"
+                    onclick="openGalleryItem(4)">
+                    <svg class="gallery-svg-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M14.5 2.5L13 4l1.5 1.5L16 4l-1.5-1.5zm-5 0L8 4l1.5 1.5L11 4l-1.5-1.5zM7 8l-4 4 1.4 1.4L7 10.8V21h2v-8.2l2.6 2.6 1.4-1.4L7 8zm10 0l-6 6 1.4 1.4L15 12.8V21h2v-8.2l2.6 2.6 1.4-1.4L17 8z" />
+                    </svg>
+                    <div class="gallery-art-title">Duel Training</div>
+                    <div class="gallery-art-desc">รอยยิ้มหลังการฝึกดวลวิชาป้องกันตัวจากศาสตร์มืดและคราบเขม่า</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
+                </div>
+                <div class="gallery-frame-item" role="button" tabindex="0" aria-label="ตรวจดูภาพ Fierce Resolve"
+                    onclick="openGalleryItem(5)">
+                    <img src="images/hogwarts-logo.png" class="gallery-svg-icon" alt="Hogwarts"
+                        style="object-fit: contain;" />
+                    <div class="gallery-art-title">Fierce Resolve</div>
+                    <div class="gallery-art-desc">แววตาดุเดือดสู้ศึกและจิตวิญญาณความกล้าหาญแห่งกริฟฟินดอร์</div>
+                    <div class="gallery-inspect-pill">ตรวจดูภาพ ✦ INSPECT</div>
                 </div>
             </div>
         </section>
@@ -5198,54 +3083,20 @@
                     <circle cx="18" cy="18" r="6" fill="#c99330" />
                 </svg>
 
-                <!-- 🦁 Alexan Lake Character Pop-Out Card (ตัวละครทะลุล้นออกจาก Frame ตามแบบ) -->
-                <div class="character-portrait-box popout-portrait-container">
-                    <div class="portrait-inner-art popout-art-stage" id="aboutPopoutStage">
-                        <!-- Ambient Radiant Glow Behind the Card -->
-                        <div class="popout-ambient-glow" aria-hidden="true"></div>
-
-                        <!-- The Rounded Card Frame (Background & Gold Border) -->
-                        <div class="popout-card-frame">
-                            <!-- Background Inner Atmosphere (Gryffindor Deep Crimson Velvet & Lion Watermark) -->
-                            <div class="popout-card-bg">
-                                <div class="popout-card-watermark" aria-hidden="true">
-                                    <img src="images/bg-lion.jpg" alt="" onerror="this.style.display='none';" />
-                                </div>
-                                <div class="popout-card-glow-core"></div>
-                                <div class="popout-card-corner-ornament topleft"></div>
-                                <div class="popout-card-corner-ornament topright"></div>
-                            </div>
+                <div class="character-portrait-box" style="height: 440px;">
+                    <div class="portrait-inner-art">
+                        <div class="portrait-lion-emblem" style="width: 110px; height: 110px;">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+                            </svg>
                         </div>
-
-                        <!-- Character Pop-Out Layer (Head & Hair extends 75px ABOVE the card, bottom is clipped to the card) -->
-                        <div class="popout-character-layer">
-                            <img src="images/alexan-info-cropped.png" alt="Alexan Nigelus Lake"
-                                class="popout-character-img"
-                                onerror="this.onerror=null; this.src='images/Alexan-info.png';" />
-                            <div class="popout-character-shimmer"></div>
-                        </div>
-
-                        <!-- Card Bottom Gilded Overlay & Cursive Calligraphy (matching reference image) -->
-                        <div class="popout-card-overlay">
-                            <div class="popout-cursive-name">
-                                <span class="cursive-main">Alexan</span>
-                                <span class="cursive-sub">Nigelus Lake</span>
-                            </div>
-                            <div class="popout-house-pill">
-                                <span class="pill-lion">🦁</span>
-                                <span>Gryffindor • Year 6</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Warning Quote Plaque below the character card -->
-                    <div class="popout-rules-plaque">
-                        <div class="rules-quote-text">
-                            "อย่าเดินย่องเข้ามาจากข้างหลังด้านซ้าย... ถ้าไม่อยากโดนคาถาหงายหลัง"
-                        </div>
-                        <div class="rules-author-tag">
-                            <span class="spark-star">✦</span> บันทึกเตือนความจำ (Alex's Rules)
-                        </div>
+                        <div class="portrait-name-tag" style="font-size: 1.8rem;">Alex's Rules</div>
+                        <p
+                            style="font-family: 'SOV Yoona', serif; color: #ebd09e; font-size: 1.35rem; margin-top: 14px; line-height: 1.95; letter-spacing: 0.3px;">
+                            "อย่าเดินย่องเข้ามาจากข้างหลังด้านซ้าย...<br />ถ้าไม่อยากโดนคาถาหงายหลัง"<br />
+                            <strong style="color: var(--gold-bright);">— บันทึกเตือนความจำ</strong>
+                        </p>
                     </div>
                 </div>
 
@@ -5309,115 +3160,6 @@
             <div class="scroll-rod bottom"></div>
         </div>
     </div>
-
-    <!-- ================= ENCHANTED GRIMOIRE / OPEN BOOK MODAL (เปิดสมุดบันทึกความทรงจำ) ================= -->
-    <div class="enchanted-book-scrim" id="enchantedBookModal" onclick="closeBookOnBackdrop(event)" role="dialog"
-        aria-modal="true" aria-label="สมุดบันทึกความทรงจำเวทมนตร์แห่งฮอกวอตส์">
-        <div class="book-modal-wrapper">
-            <!-- 3D Open Tome Container -->
-            <div class="magical-open-tome" id="magicalOpenTome">
-                <!-- Leather Hardcover Backing & Gilded Metal Corner Plates -->
-                <div class="tome-leather-cover">
-                    <div class="tome-corner topleft"></div>
-                    <div class="tome-corner topright"></div>
-                    <div class="tome-corner bottomleft"></div>
-                    <div class="tome-corner bottomright"></div>
-                </div>
-
-                <!-- Hanging Red Silk Bookmark Ribbon with Gilded Fringe -->
-                <div class="tome-silk-bookmark"></div>
-
-                <!-- Two-Page Open Parchment Spread -->
-                <div class="tome-spread" id="tomeSpread">
-                    <!-- Left Page: The Living Photographic Memory Canvas -->
-                    <div class="tome-page left-page">
-                        <div class="page-corner-flourish tl"></div>
-                        <div class="page-corner-flourish bl"></div>
-
-                        <div class="memory-plate-header">
-                            <span class="plate-num" id="bookPlateNum">MEMORIA I</span>
-                            <span class="plate-tag" id="bookPlateLocation">Hogsmeade Village</span>
-                        </div>
-
-                        <!-- Antique Photo Frame with Gilded Corner Brackets -->
-                        <div class="living-photo-frame">
-                            <div class="photo-corner pc-tl"></div>
-                            <div class="photo-corner pc-tr"></div>
-                            <div class="photo-corner pc-bl"></div>
-                            <div class="photo-corner pc-br"></div>
-                            <img id="bookMemoryImg" src="images/scene-1.jpg" alt="Living Memory"
-                                class="living-memory-img" />
-                            <div class="photo-ambient-vignette"></div>
-                            <div class="photo-magic-sheen"></div>
-                        </div>
-
-                        <!-- Photo Caption Plaque -->
-                        <div class="memory-caption-box">
-                            <div class="caption-title" id="bookMemoryCaption">Hogsmeade Stroll</div>
-                            <div class="caption-stamp">ARCHIVUM HOGWARTS • YEAR VI</div>
-                        </div>
-
-                        <!-- Page Flip Navigation (Prev / Next & Counter) -->
-                        <div class="tome-page-nav">
-                            <button class="tome-nav-btn prev" onclick="navigateBookMemory(-1)"
-                                title="เปิดดูบันทึกก่อนหน้า (หรือกดลูกศรซ้าย)">
-                                <span>‹</span> ก่อนหน้า
-                            </button>
-                            <span class="tome-page-counter" id="bookPageCounter">1 / 6</span>
-                            <button class="tome-nav-btn next" onclick="navigateBookMemory(1)"
-                                title="เปิดดูบันทึกถัดไป (หรือกดลูกศรขวา)">
-                                ถัดไป <span>›</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Center Book Spine Gutter & Binding Stitches -->
-                    <div class="tome-spine-gutter">
-                        <div class="spine-line"></div>
-                        <div class="spine-stitches"></div>
-                    </div>
-
-                    <!-- Right Page: The Hand-Inked Field Notes & Story -->
-                    <div class="tome-page right-page">
-                        <div class="page-corner-flourish tr"></div>
-                        <div class="page-corner-flourish br"></div>
-
-                        <!-- Antique Close Tome Wax Seal Button -->
-                        <button class="close-tome-btn" onclick="closeEnchantedBook()"
-                            title="ปิดสมุดบันทึก (หรือกด ESC)">
-                            <span class="close-icon">✕</span>
-                            <span class="close-text">ปิดสมุด</span>
-                        </button>
-
-                        <div class="journal-header">
-                            <div class="journal-latin-sub">FOLIO HISTORIAE • GRYFFINDOR</div>
-                            <h3 class="journal-title" id="bookMemoryTitle">Hogsmeade Stroll / เดินเล่นฮอกส์มี้ด</h3>
-                            <div class="journal-rule-divider"></div>
-                        </div>
-
-                        <!-- Inked Body Text with Illuminated Drop Cap -->
-                        <div class="journal-body-content">
-                            <div class="illuminated-text-wrap" id="bookMemoryText">
-                                <!-- Populated dynamically by JavaScript -->
-                            </div>
-                        </div>
-
-                        <!-- Journal Footer: Signature & Gryffindor Wax Seal -->
-                        <div class="journal-footer">
-                            <div class="journal-signature">
-                                <span class="sig-label">บันทึกความทรงจำของ</span>
-                                <strong class="sig-name">Alexan N. Lake</strong>
-                            </div>
-                            <div class="tome-wax-seal-badge" title="ตราประทับขี้ผึ้งกริฟฟินดอร์">
-                                <img src="images/crest.png" alt="Gryffindor Seal" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- ================= DOCK NAVIGATION (แถบเมนูด้านล่างตามแบบ) ================= -->
     <nav class="common-room-dock" aria-label="Gryffindor Navigation Dock">
@@ -5536,251 +3278,38 @@
             }
         };
 
-        // ================= Enhanced Gallery Memories (6 Plates) =================
         const galleryStories = [
             {
-                plate: "MEMORIA I",
-                location: "Hogsmeade Village • The Three Broomsticks",
-                captionTitle: "Hogsmeade Stroll",
                 title: "Hogsmeade Stroll / เดินเล่นฮอกส์มี้ด",
-                desc: "ช็อตช่วงวันหยุดสุดสัปดาห์ในฤดูหนาวที่หมู่บ้านฮอกส์มี้ด อเล็กซ์แอบพาเพื่อนย่องไปซื้อขนมร้านฮันนี่ดุกส์ และนั่งคุยกันข้างเตาผิงร้านไม้กวาดสามอันพร้อมบัตเตอร์เบียร์ฟองนุ่มไออุ่นคลายความหนาว",
+                desc: "ช็อตช่วงวันหยุดสุดสัปดาห์ในฤดูหนาวที่หมู่บ้านฮอกส์มี้ด อเล็กซ์แอบพาเพื่อนย่องไปซื้อขนมร้านฮันนี่ดุกส์ และนั่งคุยกันข้างเตาผิงร้านไม้กวาดสามอันพร้อมบัตเตอร์เบียร์ฟองนุ่ม",
                 image: "images/scene-1.jpg"
             },
             {
-                plate: "MEMORIA II",
-                location: "Gryffindor Tower • Northern Battlements",
-                captionTitle: "Winter Scarf",
                 title: "Winter Scarf / ผ้าพันคอรับลมหนาว",
-                desc: "ผ้าพันคอไหมพรมลายทางสีแดงเลือดหมูสลับทองที่ถักเองอย่างเบี้ยวๆ แต่นุ่มอุ่นสบาย ช่วยบังลมหนาวจากยอดหอคอยกริฟฟินดอร์ในวันที่หิมะแรกโปรยปรายทั่วปราสาทฮอกวอตส์",
+                desc: "ผ้าพันคอไหมพรมลายทางสีแดงเลือดหมูสลับทองที่ถักเองอย่างเบี้ยวๆ แต่นุ่มอุ่นสบาย ช่วยบังลมหนาวจากยอดหอคอยกริฟฟินดอร์",
                 image: "images/scene-2.jpg"
             },
             {
-                plate: "MEMORIA III",
-                location: "Quidditch Stadium • Gryffindor Chaser #07",
-                captionTitle: "Quidditch Pitch",
                 title: "Quidditch Pitch / สนามควิดดิช",
-                desc: "ภาพช่วงก่อนแมตช์การแข่งขันใหญ่กับสลิธีริน อเล็กซ์ถือไม้กวาดไฟเยอร์โบลด์คู่ใจด้วยสีหน้ามุ่งมั่นมั่นใจเต็มร้อย พร้อมจะพาทีมสิงห์ทะยานคว้าชัยชนะกลางเวหา",
+                desc: "ภาพช่วงก่อนแมตช์การแข่งขันใหญ่กับสลิธีริน อเล็กซ์ถือไม้กวาดและไม้ตีบลัดเจอร์ด้วยสีหน้ามั่นใจเต็มร้อย พร้อมจะพาทีมคว้าชัยชนะ",
                 image: "images/scene-3.jpg"
             },
             {
-                plate: "MEMORIA IV",
-                location: "Gryffindor Common Room • Fireside Lounge",
-                captionTitle: "Prank Fireworks",
                 title: "Prank Fireworks / จังหวะหน้าแดง",
-                desc: "เหตุการณ์ตอนที่ตั้งใจจะจุดประทัดควันดักแกล้งเพื่อนในห้องนั่งเล่นรวม แต่ดันโดนจับได้คาหนังคาเขาจนแก้ตัวไม่ถูกหน้าแดงแจ๋ ท่ามกลางเสียงหัวเราะของเพื่อนร่วมบ้าน",
-                image: "images/alexan-profile.jpg"
+                desc: "เหตุการณ์ตอนที่ตั้งใจจะจุดประทัดควันดักแกล้งเพื่อนในห้องนั่งเล่นรวม แต่โดนจับได้จนแก้ตัวไม่ถูกจนหน้าแดงแจ๋",
+                image: "images/alexan-profile.png"
             },
             {
-                plate: "MEMORIA V",
-                location: "D.A.D.A. Chambers • Spell Duel Arena",
-                captionTitle: "Duel Training",
                 title: "Duel Training / หลังการดวลฝึกซ้อม",
-                desc: "เสื้อคลุมเปื้อนเขม่าควันคาถาหลังฝึกดวลวิชาป้องกันตัวจากศาสตร์มืดจนเหงื่อท่วม แต่ยังมีรอยยิ้มภาคภูมิใจไม่เคยยอมแพ้ พร้อมจะลุกขึ้นสู้ใหม่เสมอ",
-                image: "images/alexan-profile.jpg"
+                desc: "เสื้อคลุมเปื้อนเขม่าควันคาถาหลังฝึกดวลวิชาป้องกันตัวจากศาสตร์มืดจนเหงื่อท่วม แต่ยังมีรอยยิ้มภาคภูมิใจไม่เคยยอมแพ้",
+                image: "images/alexan-profile.png"
             },
             {
-                plate: "MEMORIA VI",
-                location: "The Great Hall • Lion's Sanctum",
-                captionTitle: "Fierce Resolve",
                 title: "Fierce Resolve / จิตวิญญาณกริฟฟินดอร์",
-                desc: "แววตาแน่วแน่แม้จะสูญเสียดวงตาข้างซ้ายและขาขวา แต่อเล็กซ์ก็พิสูจน์ให้ทุกคนเห็นว่าหัวใจแห่งความกล้าหาญไม่ได้สูญเสียไปตามร่างกายเลยแม้แต่น้อย",
-                image: "images/alexan-profile.jpg"
+                desc: "แววตาแน่วแน่แม้จะสูญเสียดวงตาข้างซ้ายและขาขวา แต่อเล็กซ์ก็พิสูจน์ให้ทุกคนเห็นว่าหัวใจแห่งความกล้าหาญไม่ได้สูญเสียไปตามร่างกายเลย",
+                image: "images/alexan-profile.png"
             }
         ];
-
-        // ================= Marauder's Map Controls =================
-        let isMarauderMapActive = true; // Open by default for immediate immersion!
-
-        function toggleMarauderMap() {
-            const mapBase = document.getElementById('maraudersMapBase');
-            const spellText = document.getElementById('mapSpellText');
-            const spellSub = document.getElementById('mapSpellSub');
-            if (!mapBase) return;
-
-            isMarauderMapActive = !isMarauderMapActive;
-            if (isMarauderMapActive) {
-                mapBase.classList.add('active');
-                if (spellText) spellText.textContent = "แผนลวงสำเร็จแล้ว";
-                if (spellSub) spellSub.textContent = '"Mischief Managed" • แตะเพื่อพับเก็บแผนที่';
-            } else {
-                mapBase.classList.remove('active');
-                if (spellText) spellText.textContent = "ข้าขอสาบานอย่างจริงจังว่าข้านั้นหาความดีมิได้";
-                if (spellSub) spellSub.textContent = '"I solemnly swear that I am up to no good" • แตะเพื่อคลี่เปิดแผนที่ 3D';
-            }
-        }
-
-        function handleMapBaseClick(e) {
-            // If map is currently closed and user clicks anywhere on the cover, unfold it!
-            if (!isMarauderMapActive) {
-                toggleMarauderMap();
-            }
-        }
-
-        // ================= Enchanted Open Book (Grimoire Modal) Controls =================
-        let currentBookIndex = 0;
-        let isBookModalOpen = false;
-
-        function openEnchantedBook(index) {
-            if (index < 0 || index >= galleryStories.length) index = 0;
-            currentBookIndex = index;
-            renderBookPage(currentBookIndex);
-
-            const modal = document.getElementById('enchantedBookModal');
-            if (modal) {
-                modal.classList.add('active');
-                isBookModalOpen = true;
-            }
-
-            // Play delicate magical page rustle / harp chime
-            if (typeof playSpellHarpTone === 'function') {
-                playSpellHarpTone(659.25, 0, 0.35);
-                playSpellHarpTone(880.00, 0.08, 0.45);
-            }
-
-            try {
-                if (!window.history.state || !window.history.state.enchantedBookOpen) {
-                    window.history.pushState({ enchantedBookOpen: true }, '');
-                }
-            } catch (e) { }
-        }
-
-        function renderBookPage(index) {
-            const story = galleryStories[index];
-            if (!story) return;
-
-            // Left Page updates
-            const plateNum = document.getElementById('bookPlateNum');
-            const plateLoc = document.getElementById('bookPlateLocation');
-            const memImg = document.getElementById('bookMemoryImg');
-            const caption = document.getElementById('bookMemoryCaption');
-            const counter = document.getElementById('bookPageCounter');
-
-            if (plateNum) plateNum.textContent = story.plate;
-            if (plateLoc) plateLoc.textContent = story.location;
-            if (memImg) {
-                memImg.src = story.image;
-                memImg.alt = story.captionTitle;
-            }
-            if (caption) caption.textContent = story.captionTitle;
-            if (counter) counter.textContent = `${index + 1} / ${galleryStories.length}`;
-
-            // Right Page updates
-            const titleEl = document.getElementById('bookMemoryTitle');
-            const textEl = document.getElementById('bookMemoryText');
-
-            if (titleEl) titleEl.textContent = story.title;
-            if (textEl) {
-                const desc = story.desc.trim();
-                const firstChar = desc.charAt(0);
-                const restOfText = desc.slice(1);
-                textEl.innerHTML = `<span class="drop-cap">${firstChar}</span>${restOfText}`;
-            }
-        }
-
-        let isPageFlipping = false;
-
-        function playPageTurnSound() {
-            if (!audioCtx) {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (AudioContext) audioCtx = new AudioContext();
-            }
-            if (!audioCtx) return;
-            try {
-                // Soft paper flutter noise
-                const bufferSize = Math.floor(audioCtx.sampleRate * 0.14);
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
-                }
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.value = 1400;
-                filter.Q.value = 1.2;
-                const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
-                noise.connect(filter);
-                filter.connect(gain);
-                gain.connect(audioCtx.destination);
-                noise.start();
-
-                // Gentle enchanted harp chime
-                playSpellHarpTone(783.99, 0.04, 0.3);
-            } catch (e) { }
-        }
-
-        function navigateBookMemory(direction) {
-            if (isPageFlipping) return; // Prevent spamming while animating
-            isPageFlipping = true;
-
-            const total = galleryStories.length;
-            currentBookIndex = (currentBookIndex + direction + total) % total;
-
-            const spread = document.getElementById('tomeSpread');
-            const animClass = direction > 0 ? 'flip-next' : 'flip-prev';
-
-            playPageTurnSound();
-
-            if (spread) {
-                spread.classList.remove('flip-next', 'flip-prev', 'page-settled');
-                // Trigger reflow to restart animation cleanly
-                void spread.offsetWidth;
-                spread.classList.add(animClass);
-
-                // At the halfway mark (240ms), update the content while the page is edge-on
-                setTimeout(() => {
-                    renderBookPage(currentBookIndex);
-                }, 240);
-
-                // Animation finishes: remove flip class, trigger golden settle glow
-                setTimeout(() => {
-                    spread.classList.remove(animClass);
-                    spread.classList.add('page-settled');
-                    isPageFlipping = false;
-                }, 490);
-            } else {
-                renderBookPage(currentBookIndex);
-                isPageFlipping = false;
-            }
-        }
-
-        function closeEnchantedBook(fromHistory = false) {
-            const modal = document.getElementById('enchantedBookModal');
-            if (modal) modal.classList.remove('active');
-
-            if (isBookModalOpen && !fromHistory) {
-                if (window.history.state && window.history.state.enchantedBookOpen) {
-                    window.history.back();
-                }
-            }
-            isBookModalOpen = false;
-        }
-
-        function closeBookOnBackdrop(e) {
-            if (e.target.id === 'enchantedBookModal') {
-                closeEnchantedBook();
-            }
-        }
-
-        // Backward compatibility: alias openGalleryItem to openEnchantedBook
-        function openGalleryItem(index) {
-            openEnchantedBook(index);
-        }
-
-        // Keyboard navigation for the open book (ESC to close, Arrow keys to flip)
-        window.addEventListener('keydown', (e) => {
-            if (!isBookModalOpen) return;
-            if (e.key === 'Escape') {
-                closeEnchantedBook();
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                navigateBookMemory(1);
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                navigateBookMemory(-1);
-            }
-        });
 
         // ================= Modal Management & Mobile History Back Navigation =================
         let isModalOpen = false;
